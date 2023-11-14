@@ -1,0 +1,31 @@
+<div class="p-6">
+    <p class="font-medium text-xl mb-4">Edit Category</p>
+    <form [formGroup]="categoryForm" (ngSubmit)="updateCategory()">
+      <input type="hidden" formControlName="_id">
+  
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Category Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched">
+            Category name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Category Description</mat-label>
+          <textarea matInput formControlName="description" rows="5"></textarea>
+          <mat-error *ngIf="categoryForm.controls['description'].invalid && categoryForm.controls['description'].touched">
+            Description is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="mt-4">
+        <button type="submit" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-blue-500 hover:border-2 font-bold py-2 px-4 rounded w-full">Update Category</button>
+      </div>
+    </form>
+  </div>
+  

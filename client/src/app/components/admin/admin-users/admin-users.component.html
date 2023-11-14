@@ -1,0 +1,47 @@
+<div class="p-6">
+  <p class="font-medium text-xl mb-4">Admin Users</p>
+  <div class="flex flex-row justify-end">
+    <button type="button" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-blue-500 hover-border-2 hover-border-gray-900 font-bold py-2 px-4" (click)="openAddUserModal()">Add User</button>
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+    <table class="w-full text-sm text-left text-gray-500 min-w-[600px]">
+      <thead class="text-xs text-gray-700 uppercase">
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Role</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Mobile</th> <!-- Add mobile number column -->
+          <th scope="col" class="px-6 py-3">Address</th> <!-- Add address column -->
+          <th scope="col" class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b" *ngFor="let user of users; let i = index">
+          <th scope="row" class="px-6 py-4">
+            {{ i + 1 }}
+          </th>
+          <td class="px-6 py-4">
+            {{ user.name }}
+          </td>
+          <td class="px-6 py-4">
+            {{ user.role }}
+          </td>
+          <td class="px-6 py-4">
+            {{ user.email }}
+          </td>
+          <td class="px-6 py-4">
+            {{ user.mobile }}
+          </td>
+          <td class="px-6 py-4">
+            {{ user.address }}
+          </td>
+          <td class="flex flex-col px-6 py-4 text-white gap-2">
+            <button class="font-medium bg-gray-900 py-2 px-4" (click)="openEditUserModal(user)">Edit</button>
+            <button class="font-medium bg-red-600 py-2 px-4" (click)="deleteUser(user._id, user.name)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

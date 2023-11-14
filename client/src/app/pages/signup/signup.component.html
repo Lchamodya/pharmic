@@ -1,0 +1,46 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="max-w-md w-full p-6 bg-white rounded-md shadow-md">
+      <h2 class="text-4xl font-semibold mb-6 text-center">Sign Up</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <mat-form-field class="w-full">
+          <input matInput placeholder="Name" formControlName="name">
+          <mat-error *ngIf="signupForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <input matInput type="email" placeholder="Email" formControlName="email">
+          <mat-error *ngIf="signupForm.get('email')?.hasError('required')">Email is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error *ngIf="signupForm.get('password')?.hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+          <mat-error *ngIf="signupForm.get('confirmPassword')?.hasError('required')">Confirm Password is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <textarea matInput placeholder="Address" formControlName="address"></textarea>
+          <mat-error *ngIf="signupForm.get('address')?.hasError('required')">Address is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <input matInput type="text" placeholder="Mobile Number" formControlName="mobile">
+          <mat-error *ngIf="signupForm.get('mobile')?.hasError('required')">Mobile Number is required</mat-error>
+        </mat-form-field>
+  
+        <button type="submit" class="bg-blue-500 text-white rounded-full py-2 px-4 w-full hover:bg-blue-600">
+          Sign Up
+        </button>
+      </form>
+  
+      <div class="mt-4 flex flex-col justify-center items-center">
+        <a href="/login" class="text-blue-500">Already have an account? Login</a>
+      </div>
+    </div>
+  </div>
+  

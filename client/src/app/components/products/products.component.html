@@ -1,0 +1,13 @@
+<div class="min-h-screen flex flex-col px-4 md:px-28 justify-center items-center text-center">
+    <p class="mt-8 ms:mt-0 text-4xl md:text-6xl font-bold mb-8">Featured Medecine</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 justify-center">
+      <div *ngFor="let medecine of medecines" class="flex flex-col gap-3 justify-between items-center bg-white rounded-xl shadow-xl p-8 max-w-[400px]">
+        <img [src]="medecine.imageUrl" alt="medecine Image" class="h-48">
+        <h2 class="text-2xl font-semibold mt-2">{{ medecine.name }}</h2>
+        <p class="text-gray-600 mt-2">{{ medecine.category }}</p>
+        <p class="text-2xl font-bold text-blue-500 mt-2">${{ medecine.amount }}</p>
+        <a [routerLink]="['/medecine', medecine._id]" class="text-blue-500">View</a>
+      </div>
+    </div>
+    <a href="/medecines" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 w-52 text-xl text-center mt-8">View All Medecines</a>
+</div>

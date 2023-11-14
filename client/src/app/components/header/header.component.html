@@ -1,0 +1,49 @@
+<div class="bg-white py-4 mx-4 md:mx-8">
+  <div class="flex flex-col lg:flex-row gap-4 md:gap-0 items-center justify-between border-b-2 border-blue-500 pb-4 md:pb-0">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
+      <a href="/">
+        <div class="text-4xl font-bold text-blue-500">
+          Pharmic
+        </div>
+      </a>
+      <div class="flex flex-col justify-center items-center">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="flex items-center w-80">
+            <div class="relative flex-grow mt-5">
+              <mat-form-field class="w-full">
+                <input matInput placeholder="Search for products in our store" formControlName="searchValue" class="w-full" />
+              </mat-form-field>
+            </div>
+            <button mat-button type="submit" class="ml-2 bg-blue-500 py-3 px-4 text-white flex flex-row gap-3 font-medium text-lg rounded-r-full">
+              <fa-icon [icon]="searchIcon" size="lg" class="text-white"></fa-icon> <p>Search</p>
+            </button>          
+        </form>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 xl:grid-cols-4 gap-x-2 xl:gap-14 mb-4 lg:mb-0">
+      <div *ngFor="let link of navigationLinks">
+        <a [href]="link.link" class="text-black hover:text-blue-500 hover:underline text-md font-semibold text-lg">{{ link.label }}</a>
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-center items-center">
+      <a href="cart" class="text-black ml-4">
+        <fa-icon [icon]="cartIcon" size="xl"></fa-icon>
+      </a>
+
+      <div *ngIf="user; else loginSection" class="flex flex-row justify-center items-center">
+        <a href="/user" class="text-black ml-4">{{ user?.name }}</a>
+        <button mat-button type="button" class="ml-4 bg-blue-500 text-white px-3 py-1 text-center pb-2 rounded-md" (click)="logout()">
+          Logout
+        </button>
+      </div>
+      
+      <ng-template #loginSection>
+        <a href="/login" class="text-white ml-4 bg-blue-500 px-3 py-1 text-center pb-2 rounded-md">
+          Login
+        </a>
+      </ng-template>
+      
+    </div>
+  </div>
+</div>

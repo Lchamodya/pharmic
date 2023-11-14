@@ -1,0 +1,30 @@
+<div>
+    <div class="mx-4 md:mx-12 py-8 text-white flex flex-col gap-12 justify-center items-center bg-cover bg-center" style="background-image: url('assets/images/products.jpg');">
+        <h2 class="text-6xl font-extrabold text-blue-500">All Medecines</h2>
+        <div class="flex flex-col justify-center items-center gap-4">
+          <div>
+            <select placeholder="Select a category" [(ngModel)]="selectedCategory" (change)="onCategoryChange($event)" class="p-2 bg-white text-gray-900 text-base sm:text-xl rounded-full ">
+            <option selected value="">All Categories</option>
+              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+        </div>
+          <div class="flex items-center justify-center">
+            <div class="w-96">
+              <input placeholder="Search for medicines" #searchInput (input)="onSearchTermChange(searchInput.value)" class="bg-white text-gray-900 text-lg sm:text-xl rounded-full py-1 sm:py-2 px-3 sm:px-4 w-full"/>
+            </div>
+          </div>
+        </div>
+      </div>
+<div class="container mx-auto py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 just">
+      <div *ngFor="let medecine of filteredMedecines" class="bg-white rounded-lg shadow-lg p-4 flex flex-col gap-3 justify-between items-center">
+        <img [src]="medecine.imageUrl" alt="medecine Image" class="w-full h-48 object-cover">
+        <h3 class="text-xl font-semibold mt-4">{{ medecine.name }}</h3>
+        <p class="text-gray-600">{{ medecine.category }}</p>
+        <p class="text-lg font-semibold text-blue-500 mt-2">Rs:{{ medecine.amount }}/=
+        <a [routerLink]="['/medecine', medecine._id]" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 w-full text-xl text-center">View</a>
+      </div>
+    </div>
+</div>
+  
+  

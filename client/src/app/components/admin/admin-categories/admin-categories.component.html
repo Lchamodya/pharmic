@@ -1,0 +1,35 @@
+
+<div class="flex flex-row justify-end">
+  <button type="button" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-blue-500 hover:border-2 hover:border-blue-500 font-bold py-2 px-4" (click)="openAddCategoryModal()">Add Category</button>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+    <table class="w-full text-sm text-left text-gray-500 min-w-[600px]">
+      <thead class="text-xs text-gray-700 uppercase">
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Description</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b" *ngFor="let category of categories; let i = index">
+          <th scope="row" class="px-6 py-4">
+            {{ i + 1 }}
+          </th>
+          <td class="px-6 py-4">
+            {{ category.name }}
+          </td>
+          <td class="px-6 py-4">
+            {{ category.description }}
+          </td>
+          <td class="flex flex-col px-6 py-4 gap-2 text-white">
+            <button class="font-medium bg-gray-900 py-2 px-4" (click)="openEditCategoryModal(category)">Edit</button>
+            <button  class="font-medium bg-red-600 py-2 px-4" (click)="openDeleteConfirmationModal(category._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

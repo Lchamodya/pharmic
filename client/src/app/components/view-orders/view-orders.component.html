@@ -1,0 +1,22 @@
+<div class="mt-4">
+  <table class="w-full text-sm text-left text-gray-500 min-w-[600px]">
+    <thead class="text-xs text-gray-700 uppercase">
+      <tr>
+        <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">Medicine</th>
+        <th scope="col" class="px-6 py-3">Quantity</th>
+        <th scope="col" class="px-6 py-3">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index">
+        <th scope="row" class="px-6 py-4">{{ i + 1 }}</th>
+        <td class="px-6 py-4">
+          {{ order.medicine?.name }} - {{ order.medicine?.category }}
+        </td>
+        <td class="px-6 py-4">{{ order?.quantity }}</td>
+        <td class="px-6 py-4">{{ order?.medicine.amount | currency:'USD':'symbol' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

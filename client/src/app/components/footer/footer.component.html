@@ -1,0 +1,37 @@
+<footer class="px-4 md:px-8 bg-blue-500 text-white py-6">
+  <div class="mx-auto flex flex-col md:flex-row items-center justify-between border-t-2 border-blue-500 pt-6">
+    <div class="md:w-1/4 flex flex-col gap-4">
+      <div class="text-4xl font-bold text-white">Pharmic</div>
+      <div class="mt-4">
+        <a href="#" class="text-white mr-4">
+          <fa-icon [icon]="facebookIcon" size="lg"></fa-icon>
+        </a>
+        <a href="#" class="text-white mr-4">
+          <fa-icon [icon]="twittwerIcon" size="lg"></fa-icon>
+        </a>
+        <a href="#" class="text-white">
+          <fa-icon [icon]="instagramIcon" size="lg"></fa-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="md:w-1/4 mt-4 md:mt-0">
+      <div class="grid grid-cols-3 md:grid-cols-4 gap-6 md:gap-14">
+        <div *ngFor="let link of navigationLinks">
+          <a [href]="link.link" class="block hover:underline font-semibold">{{ link.label }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:w-1/4 mt-4 md:mt-0 flex flex-col gap-4">
+      <p>
+        123, Pannipitiya
+        Maharagama,
+        Sri Lanka
+        </p>
+        <p>Email: chamodya@gmail.com</p>
+        <p>Phone: (+94) 71 262 7890</p>
+    </div>
+  </div>
+</footer>
+

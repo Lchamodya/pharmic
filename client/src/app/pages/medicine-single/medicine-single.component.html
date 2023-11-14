@@ -1,0 +1,25 @@
+<div class="container mx-auto py-8">
+    <div class="bg-white rounded-lg shadow-lg p-4 flex flex-col md:flex-row gap-8 md:gap-28 items-center">
+        <div>
+            <img [src]="medicine.imageUrl" alt="Medicine Image" class="w-full h-52 md:h-96 object-cover">
+        </div>
+        <div class="flex flex-col gap-6 justify-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mt-4">{{ medicine.name }}</h2>
+            <p class="text-gray-600 text-2xl md:text-3xl">{{ medicine.category }}</p>
+            <p class="text-md font-normal">{{medicine.description}}</p>
+            <p class="text-3xl font-semibold text-blue-500 mt-2">${{ medicine.amount }}</p>
+            
+            <div class="flex flex-col items-center justify-center mt-4">
+                <div class="flex flex-row gap-4 items-center mt-4">
+                    <div class=" flex flex-row justify-center">
+                        <button class="px-4 py-2 border border-gray-300 rounded-full text-xl" (click)="decreaseQuantity()">-</button>
+                        <input type="text" [(ngModel)]="selectedQuantity" class="text-2xl text-center w-20" min="1" />
+                        <button class="px-4 py-2 border border-gray-300 rounded-full text-xl" (click)="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <button class="bg-blue-500 text-white rounded-full w-full py-4 px-6 mt-4 text-xl" (click)="addToCart()"> <fa-icon [icon]="cartIcon" size="xl" class="mr-4"></fa-icon>Add to Cart</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,61 @@
+<div class="w-full">
+    <p class="font-medium text-xl mb-4">Edit User Data</p>
+    <form [formGroup]="editUserForm" (ngSubmit)="saveChanges()">
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="editUserForm.controls['name'].invalid && editUserForm.controls['name'].touched" class="text-mat-error text-mat-error-message">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="editUserForm.controls['email'].invalid && editUserForm.controls['email'].touched" class="text-mat-error text-mat-error-message">
+            Email is required and must be a valid email.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="editUserForm.hasError('required')" class="text-mat-error text-mat-error-message">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="editUserForm.hasError('minlength')" class="text-mat-error text-mat-error-message">
+            Password must be at least 8 characters long.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPassword">
+          <mat-error *ngIf="editUserForm.hasError('passwordMismatch')" class="text-mat-error text-mat-error-message">
+            Passwords do not match.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-full">
+        <textarea matInput placeholder="Address" formControlName="address"></textarea>
+        <mat-error *ngIf="editUserForm.get('address')?.hasError('required')">Address is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <input matInput type="text" placeholder="Mobile Number" formControlName="mobile">
+        <mat-error *ngIf="editUserForm.get('mobile')?.hasError('required')">Mobile Number is required</mat-error>
+      </mat-form-field>
+
+      <div class="mt-4">
+        <button type="submit" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white  hover:text-blue-500 hover:border-2 hover:border-blue-500 font-bold py-2 px-4 rounded w-full" [disabled]="editUserForm.invalid">Save Changes</button>
+      </div>
+    </form>
+  </div>
+  

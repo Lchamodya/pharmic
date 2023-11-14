@@ -1,0 +1,48 @@
+<div class="flex flex-row justify-end">
+    <button type="button" class="bg-blue-500 hover:bg-white  border-2 border-blue text-white hover:text-blue-500 hover-border-2 hover:border-blue-500 font-bold py-2 px-4" (click)="openAddMedecineModal()">Add Medicine</button>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+  <table class="w-full text-sm text-left text-gray-500 min-w-[1000px]">
+    <thead class="text-xs text-gray-700 uppercase">
+      <tr>
+        <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">Medicine</th>
+        <th scope="col" class="px-6 py-3">Category</th>
+        <th scope="col" class="px-6 py-3">Description</th>
+        <th scope="col" class="px-6 py-3">Amount</th>
+        <th scope="col" class="px-6 py-3">Quantity</th>
+        <th scope="col" class="px-6 py-3">Image</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-white border-b" *ngFor="let medicine of medecines; let i = index">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+          {{ i + 1 }}
+        </th>
+        <td class="px-6 py-4">
+          {{ medicine.name }}
+        </td>
+        <td class="px-6 py-4">
+          {{ medicine.category}}
+        </td>
+        <td class="px-6 py-4">
+          {{ medicine.description }}
+        </td>
+        <td class="px-6 py-4">
+          ${{ medicine.amount }}
+        </td>
+        <td class="px-6 py-4">
+          {{ medicine.quantity }}
+        </td>
+        <td class="px-6 py-4">
+          <img [src]="medicine.imageUrl" alt="{{ medicine.name }} Image" class="h-20 object-cover">
+        </td>
+        <td class="flex flex-col justify-start px-6 py-4 gap-2 text-white">
+          <button class="font-medium bg-gray-900 py-2 px-4" (click)="openEditMedecineModal(medicine)">Edit</button>
+          <button class="font-medium bg-red-600 py-2 px-4" (click)="deleteConfirmation(medicine.id,medicine.name)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,65 @@
+<div class="p-6 w-full sm:w-96">
+    <p class="font-medium text-xl mb-4">Edit User</p>
+    <form [formGroup]="userForm" (ngSubmit)="editUser()">
+      <input type="hidden" formControlName="userId" [value]="user.id">
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">
+            User name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+            Valid email is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.controls['role'].invalid && userForm.controls['role'].touched">
+            Role is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+            Password is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPassword">
+          <mat-error *ngIf="userForm.controls['confirmPassword'].invalid && userForm.controls['confirmPassword'].touched">
+            Password confirmation is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-full">
+        <textarea matInput placeholder="Address" formControlName="address"></textarea>
+        <mat-error *ngIf="userForm.get('address')?.hasError('required')">Address is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <input matInput type="text" placeholder="Mobile Number" formControlName="mobile">
+        <mat-error *ngIf="userForm.get('mobile')?.hasError('required')">Mobile Number is required</mat-error>
+      </mat-form-field>
+      <div class="mt-4">
+        <button type="submit" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-gray-900 hover-border-2 hover-border-gray-900 font-bold py-2 px-4 rounded w-full" [disabled]="userForm.invalid">Save Changes</button>
+      </div>
+    </form>
+</div>

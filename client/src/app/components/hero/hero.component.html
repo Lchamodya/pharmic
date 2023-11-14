@@ -1,0 +1,14 @@
+<div class="min-h-screen flex flex-col lg:flex-row px-4 sm:px-8 items-center justify-between">
+  <div class="p-4 flex flex-col gap-14 lg:w-[900px]">
+    <h1 class="text-6xl md:text-8xl font-bold">
+      {{ mainTitle }}
+      <span class="text-blue-500">{{ highlightedText }}</span>
+      {{ subTitle }}
+    </h1>
+    <p class="text-gray-600 text-base md:text-xl">{{ description }}</p>
+    <a [href]="'#services'" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 \w-40 sm:w-80 text-xl text-center">{{ buttonText }}</a>
+  </div>
+  <div class="p-4 flex flex-col justify-center items-center">
+    <img src="{{ imagePath }}" alt="Hero Image" class="max-h-[500px] rounded-lg shadow-lg">
+  </div>
+</div>

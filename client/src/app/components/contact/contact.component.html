@@ -1,0 +1,35 @@
+<div id="contact" class="min-h-screen flex flex-col lg:flex-row px-4 sm:px-8 items-center justify-between">
+    <div class="w-full lg:w-1/2 p-4">
+      <img [src]="imagePath" alt="Contact Us Image" class=" hidden lg:block rounded-lg shadow-lg w-full">
+    </div>
+  
+    <div class="w-full flex flex-col gap-8 lg:w-1/2 p-4">
+      <h2 class="text-4xl md:text-6xl font-bold mb-4">Contact Us</h2>
+  
+      <form [formGroup]="contactForm" class="flex flex-col gap-8">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name" formControlName="name">
+          <mat-error *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+            Email is required and must be a valid email address
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Message" formControlName="message" rows="8"></textarea>
+          <mat-error *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+            Message is required
+          </mat-error>
+        </mat-form-field>
+    
+        <button mat-raised-button type="submit" class="bg-blue-500 text-white py-4 px-4 rounded-full hover-bg-blue-700w-full text-xl">Submit</button>
+      </form>
+    </div>
+  </div>
+  

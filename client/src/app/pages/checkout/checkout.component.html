@@ -1,0 +1,32 @@
+<div class="px-4 md:px-24 lg:px-48 mx-auto mt-8">
+  <h2 class="text-4xl font-semibold text-center">Checkout</h2>
+  <div class="flex flex-col md:flex-row justify-between">
+    <div class="mt-8">
+      <h3 class="text-3xl font-semibold mb-8">Order Summary</h3>
+      <ul>
+        <li *ngFor="let item of cartItems" class="text-lg md:text-2xl font-medium">
+          {{ item.medicine?.name }} - {{ item.quantity }} x ${{ item.medicine?.amount}}
+        </li>
+      </ul>
+    </div>
+    <div class="mt-8">
+      <p class="text-3xl font-semibold mb-8">Payment Options</p>
+      <label class="block my-2 text-lg">
+        <input type="radio" name="paymentOption" value="cashOnDelivery" [(ngModel)]="selectedPaymentOption" class="text-lg">
+        Cash on Delivery
+      </label>
+
+      <label class="block my-2">
+        <input type="radio" name="paymentOption" value="cardPayment" [(ngModel)]="selectedPaymentOption" class="text-lg">
+        Credit/Debit Card
+      </label>
+
+      <div *ngIf="selectedPaymentOption === 'cardPayment'" class="text-lg">
+        Add payment gateway content here
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-center mt-8 mb-8">
+    <button class="text-center bg-green-500 text-white p-4 rounded-full mt-4 font-semibold w-full md:w-72 text-xl" (click)="placeOrder()">Place Order</button>
+  </div>
+</div>

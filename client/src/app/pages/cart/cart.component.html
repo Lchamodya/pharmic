@@ -1,0 +1,24 @@
+<div class="mx-4 md:mx-8 mt-8 py-8 flex flex-col">
+  <h2 class="text-3xl mb-4 font-semibold text-center">Cart Items</h2>
+  <div *ngIf="cartItems.length === 0" class="text-gray-600 mt-4">Your cart is empty.</div>
+  <div *ngFor="let item of cartItems" class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 p-4 gap-4">
+    <div>
+      <!-- Use safe navigation operator here -->
+      <h3 class="text-xl font-semibold">{{ item.medicine?.name }}</h3>
+      <p class="text-gray-600">Category: {{ item.medicine?.category }}</p>
+      <p class="text-blue-500">Price: ${{ item.medicine?.amount }}</p>
+    </div>
+    <div class="flex items-center">
+      <button (click)="decrementQuantity(item)" class="bg-blue-500 text-white p-2 rounded-full">-</button>
+      <span class="mx-4">{{ item.quantity }}</span>
+      <button (click)="incrementQuantity(item)" class="bg-blue-500 text-white p-2 rounded-full">+</button>
+      <!-- Use safe navigation operator here -->
+      <button (click)="removeFromCart(item)" class="bg-red-500 text-white p-2 rounded-full ml-4">Remove</button>
+    </div>
+  </div>
+  <div class="flex flex-col items-center w-full">
+    <div *ngIf="cartItems.length > 0" class="text-2xl font-semibold text-blue-500 mt-4">Total: ${{ calculateTotal() }}</div>
+    <!-- Use RouterLink instead of href for internal navigation -->
+    <a routerLink="/checkout" class="text-center bg-green-500 text-white p-4 rounded-full mt-4 font-semibold w-full md:w-72">Checkout</a>
+  </div>
+</div>

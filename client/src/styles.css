@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
