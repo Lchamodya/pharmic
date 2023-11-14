@@ -21,7 +21,7 @@
         <img [src]="medecine.imageUrl" alt="medecine Image" class="w-full h-48 object-cover">
         <h3 class="text-xl font-semibold mt-4">{{ medecine.name }}</h3>
         <p class="text-gray-600">{{ medecine.category }}</p>
-        <p class="text-lg font-semibold text-blue-500 mt-2">Rs:{{ medecine.amount }}/=
+        <p class="text-lg font-semibold text-blue-500 mt-2">${{ medecine.amount }}/=
         <a [routerLink]="['/medecine', medecine._id]" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 w-full text-xl text-center">View</a>
       </div>
     </div>
