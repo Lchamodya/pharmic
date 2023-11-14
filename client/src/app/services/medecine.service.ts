@@ -131,7 +131,6 @@ export class MedicineService {
       if (socketUpdate) {
         return {
           ...existingMedicine,
-          // Merge other properties as needed
         };
       } else {
         return existingMedicine;
