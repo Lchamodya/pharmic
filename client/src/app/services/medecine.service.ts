@@ -145,21 +145,40 @@ export class MedicineService {
     return of(result);
   }
 
+  // getMedicineByIdWithCategory(medicineId: string): Observable<Medicine> {
+  //   const medicineUrl = `${this.apiUrl}/${medicineId}`;
+
+  //   const httpObservable = this.http.get<Medicine>(medicineUrl);
+
+  //   const socketObservable = new Observable<Medicine>((observer) => {
+  //     this.socket.on('medicineDetails', (medicines: any) => {
+  //       const updatedMedicine = medicines.find((m: Medicine) => m._id === medicineId);
+  //       if (updatedMedicine) {
+  //         observer.next(updatedMedicine);
+  //       }
+  //     });
+  //   });
+
+  //   return merge(httpObservable, socketObservable).pipe(
+  //     switchMap((medicine) =>
+  //       forkJoin({
+  //         medicine: of(medicine),
+  //         category: this.categoryService.getCategoryById(medicine.category),
+  //       })
+  //     ),
+  //     map((data) => {
+  //       const medicineWithCategoryName: Medicine = {
+  //         ...data.medicine,
+  //         category: data.category.name,
+  //       };
+  //       return medicineWithCategoryName;
+  //     })
+  //   );
+  // }
   getMedicineByIdWithCategory(medicineId: string): Observable<Medicine> {
     const medicineUrl = `${this.apiUrl}/${medicineId}`;
-
-    const httpObservable = this.http.get<Medicine>(medicineUrl);
-
-    const socketObservable = new Observable<Medicine>((observer) => {
-      this.socket.on('medicineDetails', (medicines: any) => {
-        const updatedMedicine = medicines.find((m: Medicine) => m._id === medicineId);
-        if (updatedMedicine) {
-          observer.next(updatedMedicine);
-        }
-      });
-    });
-
-    return merge(httpObservable, socketObservable).pipe(
+  
+    return this.http.get<Medicine>(medicineUrl).pipe(
       switchMap((medicine) =>
         forkJoin({
           medicine: of(medicine),
