@@ -256,24 +256,6 @@ Contributions are welcome! Please follow these steps:
 
 ## 📝 License
 
-This project is licensed under the ISC License.
-
-## 👨‍💻 Author
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
-
-- Angular team for the amazing framework
-- Express.js community for the robust backend framework
-- MongoDB for the flexible database solution
-- All contributors and users of this project
-
-## 📞 Support
-
-For support, email your-email@example.com or open an issue in the GitHub repository.
-
----
+This project is licensed under the MIT License.
 
 **Note**: This is a demonstration project. Please ensure proper security measures, data validation, and compliance with healthcare regulations before using in a production environment.
