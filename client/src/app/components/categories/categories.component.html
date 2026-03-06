@@ -1,10 +1,50 @@
-<div class="min-h-screen flex flex-col px-4 md:px-28 justify-center items-center text-center">
-    <p class="mt-8 ms:mt-0 text-4xl md:text-6xl font-bold mb-8">Categories</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 justify-center">
-      <div *ngFor="let category of categories" class="flex flex-col gap-3 justify-between items-center bg-white rounded-xl shadow-xl p-8 max-w-[400px]">
-        <h2 class="text-2xl font-semibold mt-2">{{ category.name }}</h2>
-        <a href="{{category.link}}" class="text-blue-500">View</a>
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16 space-y-4">
+      <div class="inline-block">
+        <span class="bg-nordic-blue/10 text-nordic-blue px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider">
+          Browse by
+        </span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-neutral-900">
+        Medicine Categories
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        Find the right medicines organized by category for easy navigation
+      </p>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
+      <div *ngFor="let category of categories" 
+           class="group">
+        <a [href]="category.link" 
+           class="block bg-gradient-to-br from-nordic-sky/50 to-white rounded-2xl p-6 border-2 border-neutral-200 hover:border-nordic-blue transition-all duration-300 hover:shadow-lg">
+          
+          <!-- Icon placeholder -->
+          <div class="w-16 h-16 mx-auto mb-4 bg-nordic-blue/10 rounded-xl flex items-center justify-center group-hover:bg-nordic-blue group-hover:scale-110 transition-all duration-300">
+            <svg class="w-8 h-8 text-nordic-blue group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          
+          <!-- Category Name -->
+          <h3 class="text-center text-base font-semibold text-neutral-900 group-hover:text-nordic-blue transition-colors duration-200">
+            {{ category.name }}
+          </h3>
+          
+          <!-- Arrow -->
+          <div class="flex justify-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <svg class="w-5 h-5 text-nordic-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </a>
       </div>
     </div>
-</div>
+
+  </div>
+</section>
   

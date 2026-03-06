@@ -1,48 +1,103 @@
-<div class="flex flex-row justify-end">
-    <button type="button" class="bg-blue-500 hover:bg-white  border-2 border-blue text-white hover:text-blue-500 hover-border-2 hover:border-blue-500 font-bold py-2 px-4" (click)="openAddMedecineModal()">Add Medicine</button>
-</div>
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
-  <table class="w-full text-sm text-left text-gray-500 min-w-[1000px]">
-    <thead class="text-xs text-gray-700 uppercase">
-      <tr>
-        <th scope="col" class="px-6 py-3">#</th>
-        <th scope="col" class="px-6 py-3">Medicine</th>
-        <th scope="col" class="px-6 py-3">Category</th>
-        <th scope="col" class="px-6 py-3">Description</th>
-        <th scope="col" class="px-6 py-3">Amount</th>
-        <th scope="col" class="px-6 py-3">Quantity</th>
-        <th scope="col" class="px-6 py-3">Image</th>
-        <th scope="col" class="px-6 py-3">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="bg-white border-b" *ngFor="let medicine of medecines; let i = index">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          {{ i + 1 }}
-        </th>
-        <td class="px-6 py-4">
-          {{ medicine.name }}
-        </td>
-        <td class="px-6 py-4">
-          {{ medicine.category}}
-        </td>
-        <td class="px-6 py-4">
-          {{ medicine.description }}
-        </td>
-        <td class="px-6 py-4">
-          ${{ medicine.amount }}
-        </td>
-        <td class="px-6 py-4">
-          {{ medicine.quantity }}
-        </td>
-        <td class="px-6 py-4">
-          <img [src]="medicine.imageUrl" alt="{{ medicine.name }} Image" class="h-20 object-cover">
-        </td>
-        <td class="flex flex-col justify-start px-6 py-4 gap-2 text-white">
-          <button class="font-medium bg-gray-900 py-2 px-4" (click)="openEditMedecineModal(medicine)">Edit</button>
-          <button class="font-medium bg-red-600 py-2 px-4" (click)="deleteConfirmation(medicine.id,medicine.name)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<!-- Medicines Management -->
+<div class="space-y-6">
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+      <h2 class="text-2xl font-bold text-finnish-midnight">Medicines</h2>
+      <p class="text-neutral-600 text-sm mt-1">Manage your medicine inventory</p>
+    </div>
+    <button 
+      type="button" 
+      class="btn-primary flex items-center gap-2"
+      (click)="openAddMedecineModal()"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      Add Medicine
+    </button>
+  </div>
+
+  <!-- Medicines Table -->
+  <div class="bg-white rounded-xl shadow-sm border border-neutral-100 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-finnish-ice border-b border-neutral-200">
+          <tr>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">#</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Medicine</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Category</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Description</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Price</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Stock</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Image</th>
+            <th scope="col" class="px-6 py-4 text-right text-xs font-semibold text-finnish-midnight uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-100">
+          <tr class="hover:bg-finnish-ice/30 transition-colors" *ngFor="let medicine of medecines; let i = index">
+            <td class="px-6 py-4 text-sm text-neutral-600">{{ i + 1 }}</td>
+            <td class="px-6 py-4">
+              <span class="font-medium text-finnish-midnight">{{ medicine.name }}</span>
+            </td>
+            <td class="px-6 py-4">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                {{ medicine.category }}
+              </span>
+            </td>
+            <td class="px-6 py-4 text-sm text-neutral-600 max-w-xs truncate">{{ medicine.description }}</td>
+            <td class="px-6 py-4 text-sm font-semibold text-nordic-blue">${{ medicine.amount }}</td>
+            <td class="px-6 py-4">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                    [class.bg-green-100]="medicine.quantity > 20"
+                    [class.text-green-800]="medicine.quantity > 20"
+                    [class.bg-yellow-100]="medicine.quantity > 10 && medicine.quantity <= 20"
+                    [class.text-yellow-800]="medicine.quantity > 10 && medicine.quantity <= 20"
+                    [class.bg-red-100]="medicine.quantity <= 10"
+                    [class.text-red-800]="medicine.quantity <= 10">
+                {{ medicine.quantity }} units
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <img [src]="medicine.imageUrl" alt="{{ medicine.name }} Image" class="h-12 w-12 rounded-lg object-cover">
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center justify-end gap-2">
+                <button 
+                  class="px-3 py-1.5 text-sm font-medium text-nordic-blue hover:bg-finnish-ice rounded-lg transition-colors flex items-center gap-1"
+                  (click)="openEditMedecineModal(medicine)"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                  Edit
+                </button>
+                <button 
+                  class="px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-1"
+                  (click)="deleteConfirmation(medicine.id,medicine.name)"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Empty State -->
+    <div *ngIf="medecines.length === 0" class="p-12 text-center">
+      <div class="w-16 h-16 mx-auto mb-4 bg-finnish-ice rounded-full flex items-center justify-center">
+        <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-medium text-finnish-midnight mb-2">No medicines yet</h3>
+      <p class="text-neutral-600 mb-4">Get started by adding your first medicine</p>
+      <button class="btn-primary" (click)="openAddMedecineModal()">Add Medicine</button>
+    </div>
+  </div>
 </div>

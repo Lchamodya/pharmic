@@ -47,6 +47,25 @@ export class CheckoutComponent implements OnInit {
   
   selectedPaymentOption: 'cashOnDelivery' | 'cardPayment' = 'cashOnDelivery';
 
+  calculateSubtotal(): string {
+    const total = this.cartItems.reduce((sum, item) => {
+      return sum + (item.medicine?.amount || 0) * item.quantity;
+    }, 0);
+    return total.toFixed(2);
+  }
+
+  calculateTax(): string {
+    const subtotal = parseFloat(this.calculateSubtotal());
+    return (subtotal * 0.1).toFixed(2);
+  }
+
+  calculateTotal(): string {
+    const subtotal = parseFloat(this.calculateSubtotal());
+    const tax = parseFloat(this.calculateTax());
+    const shipping = 5.00;
+    return (subtotal + tax + shipping).toFixed(2);
+  }
+
   placeOrder() {
     this.orderService.createOrder().subscribe(
       () => {

@@ -1,32 +1,270 @@
-<div class="px-4 md:px-24 lg:px-48 mx-auto mt-8">
-  <h2 class="text-4xl font-semibold text-center">Checkout</h2>
-  <div class="flex flex-col md:flex-row justify-between">
-    <div class="mt-8">
-      <h3 class="text-3xl font-semibold mb-8">Order Summary</h3>
-      <ul>
-        <li *ngFor="let item of cartItems" class="text-lg md:text-2xl font-medium">
-          {{ item.medicine?.name }} - {{ item.quantity }} x ${{ item.medicine?.amount}}
-        </li>
-      </ul>
-    </div>
-    <div class="mt-8">
-      <p class="text-3xl font-semibold mb-8">Payment Options</p>
-      <label class="block my-2 text-lg">
-        <input type="radio" name="paymentOption" value="cashOnDelivery" [(ngModel)]="selectedPaymentOption" class="text-lg">
-        Cash on Delivery
-      </label>
-
-      <label class="block my-2">
-        <input type="radio" name="paymentOption" value="cardPayment" [(ngModel)]="selectedPaymentOption" class="text-lg">
-        Credit/Debit Card
-      </label>
-
-      <div *ngIf="selectedPaymentOption === 'cardPayment'" class="text-lg">
-        Add payment gateway content here
-      </div>
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-br from-finnish-ice via-snow to-white py-12 md:py-16 border-b border-neutral-100">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-bold mb-3 text-nordic-blue">Checkout</h1>
+      <p class="text-neutral-600">Complete your order details and payment information</p>
     </div>
   </div>
-  <div class="flex flex-row justify-center mt-8 mb-8">
-    <button class="text-center bg-green-500 text-white p-4 rounded-full mt-4 font-semibold w-full md:w-72 text-xl" (click)="placeOrder()">Place Order</button>
+</div>
+
+<!-- Checkout Content -->
+<div class="bg-snow min-h-screen py-8 md:py-12">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+      
+      <!-- Left Side - Shipping & Payment -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Shipping Information -->
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h2 class="text-xl font-semibold text-finnish-midnight mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-nordic-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            Shipping Information
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">Full Name</label>
+              <input 
+                type="text" 
+                class="input-finnish w-full" 
+                placeholder="Enter your full name"
+              />
+            </div>
+            
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">Email Address</label>
+              <input 
+                type="email" 
+                class="input-finnish w-full" 
+                placeholder="your.email@example.com"
+              />
+            </div>
+            
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">Phone Number</label>
+              <input 
+                type="tel" 
+                class="input-finnish w-full" 
+                placeholder="+358 00 000 0000"
+              />
+            </div>
+            
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">Street Address</label>
+              <input 
+                type="text" 
+                class="input-finnish w-full" 
+                placeholder="123 Street Name"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">City</label>
+              <input 
+                type="text" 
+                class="input-finnish w-full" 
+                placeholder="Helsinki"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-finnish-midnight mb-2">Postal Code</label>
+              <input 
+                type="text" 
+                class="input-finnish w-full" 
+                placeholder="00100"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h2 class="text-xl font-semibold text-finnish-midnight mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-nordic-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+            Payment Method
+          </h2>
+          
+          <div class="space-y-4">
+            <!-- Cash on Delivery -->
+            <label class="flex items-start p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:border-nordic-blue"
+                   [class.border-nordic-blue]="selectedPaymentOption === 'cashOnDelivery'"
+                   [class.bg-finnish-ice]="selectedPaymentOption === 'cashOnDelivery'"
+                   [class.border-neutral-200]="selectedPaymentOption !== 'cashOnDelivery'">
+              <input 
+                type="radio" 
+                name="paymentOption" 
+                value="cashOnDelivery" 
+                [(ngModel)]="selectedPaymentOption"
+                class="mt-1 w-4 h-4 text-nordic-blue focus:ring-nordic-blue"
+              />
+              <div class="ml-3 flex-grow">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-finnish-midnight">Cash on Delivery</span>
+                  <svg class="w-5 h-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-neutral-600 mt-1">Pay with cash when your order is delivered</p>
+              </div>
+            </label>
+
+            <!-- Credit/Debit Card -->
+            <label class="flex items-start p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:border-nordic-blue"
+                   [class.border-nordic-blue]="selectedPaymentOption === 'cardPayment'"
+                   [class.bg-finnish-ice]="selectedPaymentOption === 'cardPayment'"
+                   [class.border-neutral-200]="selectedPaymentOption !== 'cardPayment'">
+              <input 
+                type="radio" 
+                name="paymentOption" 
+                value="cardPayment" 
+                [(ngModel)]="selectedPaymentOption"
+                class="mt-1 w-4 h-4 text-nordic-blue focus:ring-nordic-blue"
+              />
+              <div class="ml-3 flex-grow">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-finnish-midnight">Credit/Debit Card</span>
+                  <svg class="w-5 h-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-neutral-600 mt-1">Secure payment with credit or debit card</p>
+              </div>
+            </label>
+
+            <!-- Card Payment Form -->
+            <div *ngIf="selectedPaymentOption === 'cardPayment'" class="mt-4 p-4 bg-finnish-ice rounded-xl">
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-finnish-midnight mb-2">Card Number</label>
+                  <input 
+                    type="text" 
+                    class="input-finnish w-full" 
+                    placeholder="1234 5678 9012 3456"
+                    maxlength="19"
+                  />
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-finnish-midnight mb-2">Expiry Date</label>
+                    <input 
+                      type="text" 
+                      class="input-finnish w-full" 
+                      placeholder="MM/YY"
+                      maxlength="5"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-finnish-midnight mb-2">CVV</label>
+                    <input 
+                      type="text" 
+                      class="input-finnish w-full" 
+                      placeholder="123"
+                      maxlength="3"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-finnish-midnight mb-2">Cardholder Name</label>
+                  <input 
+                    type="text" 
+                    class="input-finnish w-full" 
+                    placeholder="Name on card"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Order Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-24">
+          <h2 class="text-xl font-semibold text-finnish-midnight mb-6">Order Summary</h2>
+          
+          <!-- Order Items -->
+          <div class="space-y-4 mb-6 max-h-60 overflow-y-auto">
+            <div *ngFor="let item of cartItems" class="flex gap-3 pb-4 border-b border-neutral-100 last:border-0">
+              <div class="w-16 h-16 flex-shrink-0">
+                <img 
+                  [src]="item.medicine?.image || 'https://placehold.co/100x100/E8F4F8/003580?text=' + (item.medicine?.name || 'Med')" 
+                  [alt]="item.medicine?.name"
+                  class="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+              <div class="flex-grow min-w-0">
+                <h3 class="font-medium text-finnish-midnight truncate text-sm">{{ item.medicine?.name }}</h3>
+                <p class="text-xs text-neutral-600 mt-1">Qty: {{ item.quantity }}</p>
+                <p class="text-sm font-semibold text-nordic-blue mt-1">${{ item.medicine?.amount * item.quantity }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Breakdown -->
+          <div class="space-y-3 mb-6">
+            <div class="flex justify-between text-neutral-600 text-sm">
+              <span>Subtotal</span>
+              <span class="font-medium text-finnish-midnight">${{ calculateSubtotal() }}</span>
+            </div>
+            <div class="flex justify-between text-neutral-600 text-sm">
+              <span>Shipping</span>
+              <span class="font-medium text-finnish-midnight">$5.00</span>
+            </div>
+            <div class="flex justify-between text-neutral-600 text-sm">
+              <span>Tax (10%)</span>
+              <span class="font-medium text-finnish-midnight">${{ calculateTax() }}</span>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-3">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-finnish-midnight">Total</span>
+                <span class="text-2xl font-bold text-nordic-blue">${{ calculateTotal() }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Place Order Button -->
+          <button 
+            (click)="placeOrder()" 
+            class="btn-primary w-full mb-3"
+          >
+            Place Order
+          </button>
+
+          <a 
+            routerLink="/cart" 
+            class="btn-secondary w-full text-center block"
+          >
+            Back to Cart
+          </a>
+
+          <!-- Security Info -->
+          <div class="mt-6 pt-6 border-t border-neutral-100 space-y-2">
+            <div class="flex items-center gap-2 text-xs text-neutral-600">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>SSL Encrypted Checkout</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-neutral-600">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>100% Secure Payment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

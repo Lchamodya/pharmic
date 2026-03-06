@@ -1,24 +1,152 @@
-<div class="mx-4 md:mx-8 mt-8 py-8 flex flex-col">
-  <h2 class="text-3xl mb-4 font-semibold text-center">Cart Items</h2>
-  <div *ngIf="cartItems.length === 0" class="text-gray-600 mt-4">Your cart is empty.</div>
-  <div *ngFor="let item of cartItems" class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 p-4 gap-4">
-    <div>
-      <!-- Use safe navigation operator here -->
-      <h3 class="text-xl font-semibold">{{ item.medicine?.name }}</h3>
-      <p class="text-gray-600">Category: {{ item.medicine?.category }}</p>
-      <p class="text-blue-500">Price: ${{ item.medicine?.amount }}</p>
-    </div>
-    <div class="flex items-center">
-      <button (click)="decrementQuantity(item)" class="bg-blue-500 text-white p-2 rounded-full">-</button>
-      <span class="mx-4">{{ item.quantity }}</span>
-      <button (click)="incrementQuantity(item)" class="bg-blue-500 text-white p-2 rounded-full">+</button>
-      <!-- Use safe navigation operator here -->
-      <button (click)="removeFromCart(item)" class="bg-red-500 text-white p-2 rounded-full ml-4">Remove</button>
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-br from-finnish-ice via-snow to-white py-16 md:py-20 border-b border-neutral-100">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-nordic-blue">Shopping Cart</h1>
+      <p class="text-lg text-neutral-600">Review your items and proceed to checkout</p>
     </div>
   </div>
-  <div class="flex flex-col items-center w-full">
-    <div *ngIf="cartItems.length > 0" class="text-2xl font-semibold text-blue-500 mt-4">Total: ${{ calculateTotal() }}</div>
-    <!-- Use RouterLink instead of href for internal navigation -->
-    <a routerLink="/checkout" class="text-center bg-green-500 text-white p-4 rounded-full mt-4 font-semibold w-full md:w-72">Checkout</a>
+</div>
+
+<!-- Cart Content -->
+<div class="bg-snow min-h-screen py-12">
+  <div class="container mx-auto px-4">
+    <div *ngIf="cartItems.length === 0" class="max-w-2xl mx-auto">
+      <!-- Empty Cart State -->
+      <div class="bg-white rounded-2xl shadow-sm p-12 text-center">
+        <div class="w-24 h-24 mx-auto mb-6 bg-finnish-ice rounded-full flex items-center justify-center">
+          <svg class="w-12 h-12 text-nordic-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-semibold text-finnish-midnight mb-3">Your cart is empty</h2>
+        <p class="text-neutral-600 mb-8">Start adding medicines to your cart and they will appear here</p>
+        <a routerLink="/medecines" class="btn-primary inline-block">
+          Continue Shopping
+        </a>
+      </div>
+    </div>
+
+    <div *ngIf="cartItems.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Cart Items -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h2 class="text-2xl font-semibold text-finnish-midnight mb-6">Cart Items ({{ cartItems.length }})</h2>
+          
+          <div class="space-y-4">
+            <div *ngFor="let item of cartItems" class="flex flex-col sm:flex-row gap-4 p-4 border border-neutral-100 rounded-xl hover:border-finnish-lake transition-all duration-200">
+              <!-- Product Image -->
+              <div class="sm:w-24 sm:h-24 w-full h-40 flex-shrink-0">
+                <img 
+                  [src]="item.medicine?.image || 'https://placehold.co/200x200/E8F4F8/003580?text=' + (item.medicine?.name || 'Medicine')" 
+                  [alt]="item.medicine?.name"
+                  class="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+
+              <!-- Product Details -->
+              <div class="flex-grow">
+                <h3 class="text-lg font-semibold text-finnish-midnight mb-1">{{ item.medicine?.name }}</h3>
+                <p class="text-sm text-neutral-600 mb-2">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-finnish-ice text-nordic-blue">
+                    {{ item.medicine?.category }}
+                  </span>
+                </p>
+                <p class="text-lg font-semibold text-nordic-blue">${{ item.medicine?.amount }}</p>
+              </div>
+
+              <!-- Quantity Controls & Remove -->
+              <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3">
+                <!-- Quantity Controls -->
+                <div class="flex items-center gap-2 bg-finnish-ice rounded-lg p-1">
+                  <button 
+                    (click)="decrementQuantity(item)" 
+                    class="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-nordic-blue hover:text-white transition-all duration-200 text-finnish-midnight font-semibold"
+                  >
+                    −
+                  </button>
+                  <span class="w-10 text-center font-semibold text-finnish-midnight">{{ item.quantity }}</span>
+                  <button 
+                    (click)="incrementQuantity(item)" 
+                    class="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-nordic-blue hover:text-white transition-all duration-200 text-finnish-midnight font-semibold"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <!-- Remove Button -->
+                <button 
+                  (click)="removeFromCart(item)" 
+                  class="text-red-500 hover:text-red-600 text-sm font-medium transition-colors duration-200"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <!-- Item Total (Mobile) -->
+              <div class="sm:hidden pt-3 border-t border-neutral-100">
+                <div class="flex justify-between items-center">
+                  <span class="text-neutral-600">Item Total:</span>
+                  <span class="text-lg font-semibold text-finnish-midnight">${{ (item.medicine?.amount * item.quantity).toFixed(2) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-24">
+          <h2 class="text-xl font-semibold text-finnish-midnight mb-6">Order Summary</h2>
+          
+          <div class="space-y-4 mb-6">
+            <div class="flex justify-between text-neutral-600">
+              <span>Subtotal</span>
+              <span class="font-medium text-finnish-midnight">${{ calculateTotal().toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between text-neutral-600">
+              <span>Shipping</span>
+              <span class="font-medium text-finnish-midnight">$5.00</span>
+            </div>
+            <div class="flex justify-between text-neutral-600">
+              <span>Tax (10%)</span>
+              <span class="font-medium text-finnish-midnight">${{ (calculateTotal() * 0.1).toFixed(2) }}</span>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-4">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-finnish-midnight">Total</span>
+                <span class="text-2xl font-bold text-nordic-blue">${{ (calculateTotal() * 1.1 + 5).toFixed(2) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <a 
+            routerLink="/checkout" 
+            class="btn-primary w-full text-center block mb-3"
+          >
+            Proceed to Checkout
+          </a>
+          
+          <a 
+            routerLink="/medecines" 
+            class="btn-secondary w-full text-center block"
+          >
+            Continue Shopping
+          </a>
+
+          <!-- Security Badge -->
+          <div class="mt-6 pt-6 border-t border-neutral-100">
+            <div class="flex items-center gap-2 text-sm text-neutral-600">
+              <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Secure Checkout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

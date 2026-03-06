@@ -1,9 +1,140 @@
-<div class="flex flex-col justify-center items-center text-6xl">
-    <!-- <ng-container *ngFor="let link of links">
-      <a [href]="link.url" class=" bg-blue-500 text-white hover:bg-blue-400 px-4 py-6 text-center justify-center">
-        {{ link.label }}
-      </a>
-    </ng-container> -->
-    Admin Dashboard
+<!-- Dashboard Overview -->
+<div class="space-y-6">
+  <!-- Welcome Section -->
+  <div class="bg-gradient-to-br from-finnish-ice via-snow to-white rounded-2xl p-8 shadow-lg border border-neutral-100">
+    <h1 class="text-3xl font-bold mb-2 text-nordic-blue">Welcome back, Admin!</h1>
+    <p class="text-neutral-600">Here's what's happening with your pharmacy today.</p>
   </div>
-  
+
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Total Medicines -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100 hover:shadow-md transition-shadow">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold text-finnish-midnight mb-1">{{ totalMedicines }}</h3>
+      <p class="text-neutral-600 text-sm">Total Medicines</p>
+    </div>
+
+    <!-- Total Orders -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100 hover:shadow-md transition-shadow">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold text-finnish-midnight mb-1">{{ totalOrders }}</h3>
+      <p class="text-neutral-600 text-sm">Total Orders</p>
+    </div>
+
+    <!-- Total Users -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100 hover:shadow-md transition-shadow">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold text-finnish-midnight mb-1">{{ totalUsers }}</h3>
+      <p class="text-neutral-600 text-sm">Registered Users</p>
+    </div>
+
+    <!-- Revenue -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100 hover:shadow-md transition-shadow">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-2xl font-bold text-finnish-midnight mb-1">${{ totalRevenue.toFixed(2) }}</h3>
+      <p class="text-neutral-600 text-sm">Total Revenue</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions & Recent Activity -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Quick Actions -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100">
+      <h2 class="text-xl font-semibold text-finnish-midnight mb-6">Quick Actions</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <button type="button" (click)="openAddMedecineModal()" class="btn-primary text-center">
+          <svg class="w-5 h-5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          Add Medicine
+        </button>
+        <button type="button" (click)="openAddCategoryModal()" class="btn-secondary text-center">
+          <svg class="w-5 h-5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+          </svg>
+          Add Category
+        </button>
+        <a href="/admin/orders" class="btn-secondary text-center">
+          <svg class="w-5 h-5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+          View Orders
+        </a>
+        <a href="/admin/users" class="btn-secondary text-center">
+          <svg class="w-5 h-5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          Manage Users
+        </a>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-neutral-100">
+      <h2 class="text-xl font-semibold text-finnish-midnight mb-6">Recent Activity</h2>
+      <div class="space-y-4">
+        <div class="flex items-start gap-3 pb-4 border-b border-neutral-100">
+          <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-finnish-midnight font-medium">New order placed</p>
+            <p class="text-xs text-neutral-600">Order #4321 - $125.50</p>
+            <p class="text-xs text-neutral-400 mt-1">5 minutes ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 pb-4 border-b border-neutral-100">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-finnish-midnight font-medium">New user registered</p>
+            <p class="text-xs text-neutral-600">john.doe@example.com</p>
+            <p class="text-xs text-neutral-400 mt-1">1 hour ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-finnish-midnight font-medium">Medicine stock low</p>
+            <p class="text-xs text-neutral-600">Paracetamol 500mg - 12 units left</p>
+            <p class="text-xs text-neutral-400 mt-1">3 hours ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

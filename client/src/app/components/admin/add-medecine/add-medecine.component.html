@@ -1,16 +1,29 @@
-<div class="p-6">
-  <p class="font-medium text-xl mb-4">Add Medicine</p>
-  <form [formGroup]="medicineForm" (ngSubmit)="createMedicine()">
-    <div class="mb-4">
+<!-- Add Medicine Modal -->
+<div class="p-6 min-w-[500px] max-w-2xl">
+  <!-- Header -->
+  <div class="flex items-center gap-3 mb-6 pb-4 border-b border-neutral-200">
+    <div class="w-10 h-10 bg-gradient-to-br from-nordic-blue to-finnish-lake rounded-lg flex items-center justify-center">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold text-finnish-midnight">Add New Medicine</h2>
+      <p class="text-sm text-neutral-600">Add a new medicine to inventory</p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="medicineForm" (ngSubmit)="createMedicine()" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Name</mat-label>
+        <mat-label>Medicine Name</mat-label>
         <input matInput type="text" formControlName="name">
         <mat-error *ngIf="medicineForm.controls['name'].invalid && medicineForm.controls['name'].touched">
           Medicine name is required.
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="mb-4">
+
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Category</mat-label>
         <mat-select formControlName="category">
@@ -23,44 +36,54 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="mb-4">
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="3" formControlName="description"></textarea>
+      <mat-error *ngIf="medicineForm.controls['description'].invalid && medicineForm.controls['description'].touched">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Description</mat-label>
-        <textarea matInput rows="5" formControlName="description"></textarea>
-        <mat-error *ngIf="medicineForm.controls['description'].invalid && medicineForm.controls['description'].touched">
-          Description is required.
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="mb-4">
-      <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Quantity</mat-label>
+        <mat-label>Quantity (Stock)</mat-label>
         <input matInput type="number" formControlName="quantity">
         <mat-error *ngIf="medicineForm.controls['quantity'].invalid && medicineForm.controls['quantity'].touched">
-          Quantity is required and must be greater than 0.
+          Quantity must be greater than 0.
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="mb-4">
+
       <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Amount</mat-label>
+        <mat-label>Price ($)</mat-label>
         <input matInput type="number" formControlName="amount">
         <mat-error *ngIf="medicineForm.controls['amount'].invalid && medicineForm.controls['amount'].touched">
-          Amount is required and must be greater than or equal to 0.
+          Price must be greater than or equal to 0.
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="mb-4">
-      <div class="">
-        <label for="medicineImage">Medicine Image:</label>
-        <input type="file" id="selectedImage" name="selectedImage" (change)="onImageSelected($event)">
-      </div>
+
+    <div class="border-2 border-dashed border-neutral-200 rounded-lg p-4">
+      <label class="block text-sm font-medium text-finnish-midnight mb-2">Medicine Image</label>
+      <input 
+        type="file" 
+        id="selectedImage" 
+        name="selectedImage" 
+        (change)="onImageSelected($event)"
+        class="block w-full text-sm text-neutral-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-finnish-ice file:text-nordic-blue hover:file:bg-nordic-blue hover:file:text-white transition-colors cursor-pointer"
+      >
+      <p class="mt-2 text-xs text-neutral-500">PNG, JPG or WEBP (MAX. 2MB)</p>
     </div>
-    <div class="mt-4">
-      <button type="submit"
-              class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-blue-500 hover:border-2 hover-border-gray-900 font-bold py-2 px-4 rounded w-full"
-              >Add Medicine
+
+    <!-- Action Buttons -->
+    <div class="flex gap-3 pt-4">
+      <button type="submit" class="btn-primary flex-1">
+        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Add Medicine
       </button>
+      <button type="button" mat-dialog-close class="btn-secondary flex-1">Cancel</button>
     </div>
   </form>
 </div>

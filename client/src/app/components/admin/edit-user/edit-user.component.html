@@ -1,46 +1,75 @@
-<div class="p-6 w-full sm:w-96">
-    <p class="font-medium text-xl mb-4">Edit User</p>
-    <form [formGroup]="userForm" (ngSubmit)="editUser()">
-      <input type="hidden" formControlName="userId" [value]="user.id">
-      <div class="mb-4">
+<!-- Edit User Modal -->
+<div class="p-6 min-w-[500px] max-w-2xl">
+  <!-- Header -->
+  <div class="flex items-center gap-3 mb-6 pb-4 border-b border-neutral-200">
+    <div class="w-10 h-10 bg-gradient-to-br from-nordic-blue to-finnish-lake rounded-lg flex items-center justify-center">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+      </svg>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold text-finnish-midnight">Edit User</h2>
+      <p class="text-sm text-neutral-600">Update user information</p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="userForm" (ngSubmit)="editUser()" class="space-y-4">
+    <input type="hidden" formControlName="userId" [value]="user.id">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-error *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">
+          User name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+          Valid email is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput type="text" formControlName="mobile">
+        <mat-error *ngIf="userForm.get('mobile')?.hasError('required')">Mobile Number is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.controls['role'].invalid && userForm.controls['role'].touched">
+          Role is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Address</mat-label>
+      <textarea matInput rows="2" formControlName="address"></textarea>
+      <mat-error *ngIf="userForm.get('address')?.hasError('required')">Address is required</mat-error>
+    </mat-form-field>
+
+    <div class="bg-finnish-ice p-4 rounded-lg">
+      <p class="text-sm font-medium text-finnish-midnight mb-3">Change Password (Optional)</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name">
-          <mat-error *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">
-            User name is required.
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="mb-4">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email">
-          <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
-            Valid email is required.
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="mb-4">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
-            <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="userForm.controls['role'].invalid && userForm.controls['role'].touched">
-            Role is required.
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="mb-4">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Password</mat-label>
+          <mat-label>New Password</mat-label>
           <input matInput type="password" formControlName="password">
           <mat-error *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
             Password is required.
           </mat-error>
         </mat-form-field>
-      </div>
-      <div class="mb-4">
+
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Confirm Password</mat-label>
           <input matInput type="password" formControlName="confirmPassword">
@@ -49,17 +78,17 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <mat-form-field class="w-full">
-        <textarea matInput placeholder="Address" formControlName="address"></textarea>
-        <mat-error *ngIf="userForm.get('address')?.hasError('required')">Address is required</mat-error>
-      </mat-form-field>
+    </div>
 
-      <mat-form-field class="w-full">
-        <input matInput type="text" placeholder="Mobile Number" formControlName="mobile">
-        <mat-error *ngIf="userForm.get('mobile')?.hasError('required')">Mobile Number is required</mat-error>
-      </mat-form-field>
-      <div class="mt-4">
-        <button type="submit" class="bg-blue-500 hover:bg-white border-2 border-blue-500 text-white hover:text-gray-900 hover-border-2 hover-border-gray-900 font-bold py-2 px-4 rounded w-full" [disabled]="userForm.invalid">Save Changes</button>
-      </div>
-    </form>
+    <!-- Action Buttons -->
+    <div class="flex gap-3 pt-4">
+      <button type="submit" class="btn-primary flex-1" [disabled]="userForm.invalid">
+        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Save Changes
+      </button>
+      <button type="button" mat-dialog-close class="btn-secondary flex-1">Cancel</button>
+    </div>
+  </form>
 </div>

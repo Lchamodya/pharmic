@@ -1,14 +1,79 @@
-<div class="min-h-screen flex flex-col lg:flex-row px-4 sm:px-8 items-center justify-between">
-  <div class="p-4 flex flex-col gap-14 lg:w-[900px]">
-    <h1 class="text-6xl md:text-8xl font-bold">
-      {{ mainTitle }}
-      <span class="text-blue-500">{{ highlightedText }}</span>
-      {{ subTitle }}
-    </h1>
-    <p class="text-gray-600 text-base md:text-xl">{{ description }}</p>
-    <a [href]="'#services'" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 \w-40 sm:w-80 text-xl text-center">{{ buttonText }}</a>
+<section class="relative bg-gradient-to-br from-nordic-sky via-white to-finnish-ice min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      
+      <!-- Left Content -->
+      <div class="space-y-8 lg:space-y-10">
+        <div class="space-y-4">
+          <div class="inline-block">
+            <span class="bg-nordic-blue/10 text-nordic-blue px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider">
+              Trusted Healthcare
+            </span>
+          </div>
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-neutral-900">
+            {{ mainTitle }}
+            <span class="text-nordic-blue block mt-2">{{ highlightedText }}</span>
+            {{ subTitle }}
+          </h1>
+        </div>
+        
+        <p class="text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-xl">
+          {{ description }}
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a [href]="'#services'" 
+             class="inline-flex items-center justify-center bg-nordic-blue hover:bg-finnish-midnight text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+            {{ buttonText }}
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+          <a href="/medecines" 
+             class="inline-flex items-center justify-center bg-white hover:bg-nordic-sky text-nordic-blue border-2 border-nordic-blue px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
+            Browse Medicines
+          </a>
+        </div>
+
+        <!-- Stats - Finnish minimalism -->
+        <div class="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
+          <div class="text-center lg:text-left">
+            <div class="text-3xl font-bold text-nordic-blue">500+</div>
+            <div class="text-sm text-neutral-600 mt-1">Products</div>
+          </div>
+          <div class="text-center lg:text-left">
+            <div class="text-3xl font-bold text-nordic-blue">10k+</div>
+            <div class="text-sm text-neutral-600 mt-1">Customers</div>
+          </div>
+          <div class="text-center lg:text-left">
+            <div class="text-3xl font-bold text-nordic-blue">24/7</div>
+            <div class="text-sm text-neutral-600 mt-1">Support</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="relative lg:pl-12">
+        <div class="relative">
+          <!-- Decorative circle - Finnish design element -->
+          <div class="absolute -top-8 -right-8 w-72 h-72 bg-nordic-blue/10 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-finnish-lake/10 rounded-full blur-3xl"></div>
+          
+          <img [src]="imagePath" 
+               alt="Hero Image" 
+               class="relative z-10 w-full rounded-2xl shadow-2xl object-cover transform hover:scale-105 transition-transform duration-500">
+        </div>
+      </div>
+      
+    </div>
   </div>
-  <div class="p-4 flex flex-col justify-center items-center">
-    <img src="{{ imagePath }}" alt="Hero Image" class="max-h-[500px] rounded-lg shadow-lg">
+
+  <!-- Wave decoration - Finnish minimalist touch -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+      <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" 
+            fill="white" 
+            fill-opacity="0.5"/>
+    </svg>
   </div>
-</div>
+</section>

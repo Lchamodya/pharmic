@@ -1,12 +1,58 @@
-<div id="services" class="min-h-screen flex flex-col px-4 md:px-28 justify-center text-center">
-    <p class="mt-8 ms:mt-0 text-4xl md:text-6xl font-bold mb-8">Our Services</p>
-    <div class="grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
-      <div *ngFor="let service of services" class="flex flex-col gap-4 justify-center items-center bg-white rounded-xl shadow-xl p-8 max-w-[400px]">
-        <img [src]="service.imageSrc" alt="Service Image" class="w-64">
-        <h2 class="text-2xl font-semibold mt-2">{{ service.title }}</h2>
-        <p class="text-gray-600 mt-2">{{ service.description }}</p>
+<section id="services" class="py-20 bg-gradient-to-b from-white to-nordic-sky/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16 space-y-4">
+      <div class="inline-block">
+        <span class="bg-nordic-blue/10 text-nordic-blue px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider">
+          What We Offer
+        </span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-neutral-900">
+        Our Services
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        Comprehensive healthcare solutions designed with your wellbeing in mind
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let service of services" 
+           class="group bg-white rounded-2xl p-8 border-2 border-neutral-200 hover:border-nordic-blue transition-all duration-300 hover:shadow-xl">
+        
+        <!-- Icon/Image Container -->
+        <div class="mb-6 relative">
+          <div class="w-full h-48 rounded-xl overflow-hidden bg-nordic-sky/30 flex items-center justify-center">
+            <img [src]="service.imageSrc" 
+                 alt="{{service.title}}" 
+                 class="w-48 h-48 object-contain group-hover:scale-110 transition-transform duration-500">
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-3">
+          <h3 class="text-xl font-bold text-neutral-900 group-hover:text-nordic-blue transition-colors duration-200">
+            {{ service.title }}
+          </h3>
+          <p class="text-neutral-600 leading-relaxed">
+            {{ service.description }}
+          </p>
+        </div>
+
+        <!-- Decorative element -->
+        <div class="mt-6 pt-6 border-t border-neutral-100">
+          <div class="flex items-center text-nordic-blue font-medium group-hover:translate-x-2 transition-transform duration-200">
+            <span class="text-sm">Learn more</span>
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
+</section>
   
   

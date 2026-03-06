@@ -17,4 +17,5 @@ export class FooterComponent{
   facebookIcon = faFacebook;
   twittwerIcon = faTwitter;
   instagramIcon = faInstagram;
+  currentYear = new Date().getFullYear();
 }
